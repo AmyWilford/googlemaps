@@ -12,39 +12,49 @@
 <body>
     <div id="home">
         <h1 id="title">Report Pollution</h1>
-        <button id="button" class="btn btn-success" onclick=getValues()>submit</button>
-        <input id="locationSearch"></input>
+
+        <div class="d-flex justify-content-center">
+            <div id="map"></div>
+        </div>
+        
+
+        <!-- <button id="button" class="btn btn-success" onclick=getValues()>submit</button> -->
+        <!-- <input id="locationSearch"></input> -->
         <!-- <input id="lat"></input>
         <input id="lng"></input> -->
         <!-- <button id="button" class="btn btn-success" onclick=getValues()>submit</button> -->
         <form>
             <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Location</label>
+                <div class="col-sm-9">
+                  <input type="text" id="lat"class="form-control" placeholder="latitude">
+                  <input type="text" id="lng" class="form-control" placeholder="longitude">
+                </div>
+              </div>
+            <div class="form-group row">
                 <label class="col-sm-3 col-form-label">First & Last Name</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control">
+                  <input type="text" id="name" class="form-control">
                 </div>
               </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-9">
-                  <input type="text"  class="form-control">
+                  <input type="text" id="email" class="form-control">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Describe Your Pollution Concern</label>
                 <div class="col-sm-9">
-                  <input type="text"  class="form-control">
+                  <input type="text" id="pollutionConcern" class="form-control">
                 </div>
               </div>
                <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Is the problem ongoing?</label>
-                <div class="col-sm-9">
-                    <input class="form-check-input form-control" type="checkbox" id="inlineCheckbox1" value="yes">
-                    <label class="form-check-label" for="inlineCheckbox1">Yes</label>
-                </div>
+               
                 <!-- insert date picker -->
                 <div>pin your location </div>
-                <button class="btn btn-success">submit your pollution report</button>
+                <button class="btn btn-success" type="submit" id="submit-report">submit your pollution report</button>
               </div>
     
              
@@ -52,10 +62,9 @@
         <!-- <button onclick=pageChange() class="btn btn-success">report pollution</button> -->
     </div>
     
-    <div id="body" class=" d-flex justify-content-center">
+    <div class=" d-flex justify-content-center">
        
         <!-- <button id="button" class="btn btn-success" onclick=getValues()>submit</button> -->
-        <div id="map"></div>
         <div>
 
         </div>

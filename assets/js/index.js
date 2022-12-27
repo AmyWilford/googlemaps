@@ -10,6 +10,8 @@ let marker;
 let geocoder;
 let responseDiv;
 let response;
+let pollutionLat;
+let pollutionLng;
 
 let coordinates;
 let lat = 43.6532;
@@ -109,7 +111,8 @@ function initMap() {
     );
     console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lat));
     console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lng));
-
+    pollutionLat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
+    pollutionLng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
     infoWindow.open(map);
   });
 }
@@ -146,6 +149,32 @@ function placeMarkerAndPanTo(latLng, map) {
   map.panTo(latLng);
 }
 
+function submitPollutionReport(event) {
+  event.preventDefault();
+  let inputLat = document.getElementById("lat").value;
+  let inputLng = document.getElementById("lng").value;
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let pollutionConcern = document.getElementById("pollutionConcern").value;
 
+  if (inputLat || inputLng) {
+    pollutionLat = inputLat;
+    pollutionLng = inputLng;
+  }
+
+  let report = {
+    pollutionLat,
+    pollutionLng,
+    name,
+    email,
+    pollutionConcern,
+  };
+
+  console.log(report);
+  console.log("working");
+}
+
+let submitReport = document.getElementById("submit-report");
+submitReport.addEventListener("click", submitPollutionReport);
 window.initMap = initMap;
 document.head.appendChild(script);
