@@ -4,20 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>GoogleMaps Project</title>
 </head>
 <body>
     <div id="home">
-        <h1 id="title"> We be mapping</h1>
-        <button onclick=pageChange()>report pollution</button>
-    </div>
-    
-    <div id="body">
+        <h1 id="title">Report Pollution</h1>
         <input id="lat"></input>
         <input id="lng"></input>
-        <button id="button" onclick=getValues()>submit</button>
+        <button id="button" class="btn btn-success" onclick=getValues()>submit</button>
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">First & Last Name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="text"  class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Describe Your Pollution Concern</label>
+                <div class="col-sm-9">
+                  <input type="text"  class="form-control">
+                </div>
+              </div>
+               <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Is the problem ongoing?</label>
+                <div class="col-sm-9">
+                    <input class="form-check-input form-control" type="checkbox" id="inlineCheckbox1" value="yes">
+                    <label class="form-check-label" for="inlineCheckbox1">Yes</label>
+                </div>
+                <!-- insert date picker -->
+                <div>pin your location </div>
+                <button class="btn btn-success">submit your pollution report</button>
+              </div>
+    
+             
+        </form>
+        <!-- <button onclick=pageChange() class="btn btn-success">report pollution</button> -->
+    </div>
+    
+    <div id="body" class=" d-flex justify-content-center">
+       
+        <!-- <button id="button" class="btn btn-success" onclick=getValues()>submit</button> -->
         <div id="map"></div>
+        <div>
+
+        </div>
     </div>
    
     <script type="text/javascript" src="assets/js/config.js"></script>
