@@ -23,7 +23,9 @@ function getValues() {
   console.log(lat);
   let lng = parseInt(receivedLng.value);
   console.log(lng);
-  coordinates = { lat: lat, lng: lng };
+  // coordinates = { lat: lat, lng: lng };
+  coordinates = { lat: 43.6532, lng: -79.3832 };
+
   initMap();
 }
 function initMap() {
@@ -32,9 +34,21 @@ function initMap() {
     zoom: 7,
     disableDefaultUI: true, //remove?
   });
+
+  map.addListener("click", (e) => {
+    placeMarkerAndPanTo(e.latLng, map);
+  });
 }
 
+function placeMarkerAndPanTo(latLng, map) {
+  new google.maps.Marker({
+    position: latLng,
+    map: map,
+  });
+  map.panTo(latLng);
+}
 document.head.appendChild(script);
+
 // map options - including location and zoom lelvel
 //   let options = {
 //     zoom: 7,
