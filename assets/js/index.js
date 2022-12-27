@@ -1,35 +1,86 @@
 let key = config.MY_KEY;
 
+// Create script tag & link google api url with config key
+let script = document.createElement("script");
+script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
+
 let map;
 let markers = [];
-let script = document.createElement("script");
+let marker;
+let geocoder;
+let responseDiv;
+let response;
+
 let coordinates;
 let lat = 43.6532;
 let lng = -79.3832;
 // let coordinates = { lat: 43.6532, lng: -79.3832 };
-script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
 // Function to initiate static map - center point Toronto, ON
 
-function getValues() {
-  let receivedLat = document.getElementById("lat");
-  console.log(receivedLat.value);
-  let receivedLng = document.getElementById("lng");
-  lat = parseInt(receivedLat.value);
-  console.log(lat);
-  lng = parseInt(receivedLng.value);
-  console.log(lng);
-  // coordinates = { lat: 43.6532, lng: -79.3832 };
+// function getValues() {
+//   let receivedLat = document.getElementById("lat");
+//   console.log(receivedLat.value);
+//   let receivedLng = document.getElementById("lng");
+//   lat = parseInt(receivedLat.value);
+//   console.log(lat);
+//   lng = parseInt(receivedLng.value);
+//   console.log(lng);
+//   // coordinates = { lat: 43.6532, lng: -79.3832 };
 
-  initMap();
-}
+//   initMap();
+// }
 function initMap() {
   coordinates = { lat: lat, lng: lng };
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: coordinates,
     zoom: 7,
-    disableDefaultUI: true, //remove?
+    disableDefaultUI: true,
   });
+
+  geocoder = new google.maps.Geocoder();
+
+  const inputText = document.createElement("input");
+
+  inputText.type = "text";
+  inputText.placeholder = "Search your location";
+
+  const submitButton = document.createElement("input");
+
+  submitButton.type = "button";
+  submitButton.value = "Geocode";
+  submitButton.classList.add("btn", "btn-success");
+
+  const clearButton = document.createElement("input");
+
+  clearButton.type = "button";
+  clearButton.value = "Clear";
+  clearButton.classList.add("button", "button-secondary");
+  response = document.createElement("pre");
+  response.id = "response";
+  response.innerText = "";
+  responseDiv = document.createElement("div");
+  responseDiv.id = "response-container";
+  responseDiv.appendChild(response);
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+  // map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
+  marker = new google.maps.Marker({
+    map,
+  });
+  map.addListener("click", (e) => {
+    geocode({ location: e.latLng });
+  });
+  submitButton.addEventListener("click", () =>
+    geocode({ address: inputText.value })
+  );
+  clearButton.addEventListener("click", () => {
+    clear();
+  });
+  clear();
 
   map.addListener("click", (e) => {
     placeMarkerAndPanTo(e.latLng, map);
@@ -50,13 +101,41 @@ function initMap() {
       position: mapsMouseEvent.latLng,
     });
     infoWindow.setContent(
-      JSON.stringify(mapsMouseEvent.latLng.toJSON().lat+ " & "+mapsMouseEvent.latLng.toJSON().lng )
+      JSON.stringify(
+        mapsMouseEvent.latLng.toJSON().lat +
+          " & " +
+          mapsMouseEvent.latLng.toJSON().lng
+      )
     );
-    console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lat))
-    console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lng))
+    console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lat));
+    console.log(JSON.stringify(mapsMouseEvent.latLng.toJSON().lng));
 
     infoWindow.open(map);
   });
+}
+
+function clear() {
+  marker.setMap(null);
+  responseDiv.style.display = "none";
+}
+
+function geocode(request) {
+  clear();
+  geocoder
+    .geocode(request)
+    .then((result) => {
+      const { results } = result;
+
+      map.setCenter(results[0].geometry.location);
+      marker.setPosition(results[0].geometry.location);
+      marker.setMap(map);
+      responseDiv.style.display = "block";
+      response.innerText = JSON.stringify(result, null, 2);
+      return results;
+    })
+    .catch((e) => {
+      alert("Geocode was not successful for the following reason: " + e);
+    });
 }
 
 function placeMarkerAndPanTo(latLng, map) {
@@ -66,35 +145,7 @@ function placeMarkerAndPanTo(latLng, map) {
   });
   map.panTo(latLng);
 }
+
+
 window.initMap = initMap;
 document.head.appendChild(script);
-
-// map options - including location and zoom lelvel
-//   let options = {
-//     zoom: 7,
-//     center: { lat: 43.6532, lng: -79.3832 },
-//   };
-//   //   add map
-//   let map = new google.maps.Map(document.getElementById("map"), options);
-//   //   add marker
-//   let marker = new google.maps.Marker({
-//     position: { lat: 43.38, lng: -79.22 },
-//     map: map,
-//   });
-//   //   infowindow
-//   let infoWindow = new google.maps.InfoWindow({
-//     content: "<div>Lake Ontario Waterfront</div>",
-//   });
-//   //   add event listener to marker on click
-//   marker.addListener("click", function () {
-//     infoWindow.open(map, marker);
-//   });
-
-//   function addMarker(coordinates) {
-//     let marker = new google.maps.Marker({
-//       position: coordinates,
-//       map: map,
-//     });
-//   }
-
-//   addMarker({ lat: 42.4668, lng: -70.9496 });
