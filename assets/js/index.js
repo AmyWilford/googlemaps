@@ -3,17 +3,31 @@ let key = config.MY_KEY;
 let map;
 let markers = [];
 let script = document.createElement("script");
+let coordinates;
+
+// let coordinates = { lat: 43.6532, lng: -79.3832 };
 script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
 // Function to initiate static map - center point Toronto, ON
+
+function getValues() {
+  let receivedLat = document.getElementById("lat");
+  console.log(receivedLat.value);
+  let receivedLng = document.getElementById("lng");
+  let lat = parseInt(receivedLat.value);
+  console.log(lat);
+  let lng = parseInt(receivedLng.value);
+  console.log(lng);
+  coordinates = { lat: lat, lng: lng };
+  initMap();
+}
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 43.38, lng: -79.22 },
-    zoom: 8,
+    center: coordinates,
+    zoom: 7,
     disableDefaultUI: true, //remove?
   });
 }
 
-initMap;
 document.head.appendChild(script);
 // map options - including location and zoom lelvel
 //   let options = {
