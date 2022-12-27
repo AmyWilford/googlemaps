@@ -9,6 +9,12 @@ let coordinates;
 script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
 // Function to initiate static map - center point Toronto, ON
 
+function pageChange() {
+  const home = document.getElementById("home");
+  home.style.display = "none";
+  const body = document.getElementById("body");
+  body.style.display = "block";
+}
 function getValues() {
   let receivedLat = document.getElementById("lat");
   console.log(receivedLat.value);
