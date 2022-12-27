@@ -1,8 +1,8 @@
-/* * {
-    background-color: bisque;
-} */
+.custom-background{
+    background-color: #67A298;
+}
 #map {
     height: 300px;
-    width: 80%;
+    width: 75%;
 }
 
