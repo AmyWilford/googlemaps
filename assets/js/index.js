@@ -44,8 +44,8 @@ function initMap() {
   // Create geocoder search button and set attributes
   const submitButton = document.createElement("input");
   submitButton.type = "button";
-  submitButton.value = "Search";
-  submitButton.classList.add("btn", "btn-success", "m-2", "btn-sm");
+  submitButton.value = "search";
+  submitButton.classList.add("btn", "search-button", "m-2", "btn-sm");
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);

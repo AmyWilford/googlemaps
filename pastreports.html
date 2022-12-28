@@ -13,23 +13,31 @@
   />
 
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>GoogleMaps Project</title>
+    <title>pollution reporter - past reports</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/pollution-logo.png">
+
 </head>
 <body>
     <div>
         <!-- Jumbotron Header -->
-        <div class="jumbotron text-center custom-background">
-            
-            <h1 class="display-5">Report Pollution!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>          
-            <div class="d-flex justify-content-end">
-                <!-- <input id="delete-markers" type="button" value="Delete Markers" /> -->
-                <a href="/index.html">⇽ back</a>
+        <div class="text-center custom-background pb-1 row">
+            <div class="col-sm-8 d-flex justify-content-end">
+                <img src="/assets/images/pollution-logo.png"/>
+
             </div>
+            <div class="col-sm-4">
+                <div class="d-flex justify-content-end p-2">
+                    <a href="/index.html">⇽ back</a>
+                </div>
+            </div>
+            <!-- <h2 class="text-uppercase">Pollution Reporter </h2> -->
         </div>
 
         <!-- Map -->
-    <div class="text-center m-2">Click on any marker to see the details of your pollution report</div>
+    <div class="text-center m-2">
+        <p>Click on any marker to see the details of your pollution report<br>
+        Use map controls to zoom in or out to see your full range of past reports </p>
+    </div>
         <div class="d-flex justify-content-center">
             <div id="map"></div>
         </div>

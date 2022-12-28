@@ -1,15 +1,30 @@
-.custom-background{
-    background-color: #BCD6A4;
+body {
+    color: #032E66;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
 }
+.custom-background{
+    background-color: #A5D1C0;
+    font-family: 'Raleway', sans-serif;
+}
+.search-button {
+    background-color: #032E66;
+    color:white;
+
+}
+
 #map {
     height: 300px;
     width: 80%;
 }
 a {
-    color: green;
+    color: #032E66;
 }
 
 a:hover{
     color: white ;
     text-decoration: none
+}
+img {
+    width: 14rem;
 }
