@@ -1,4 +1,4 @@
-let key = config.MY_KEY;
+let key = MY_KEY;
 
 let script = document.createElement("script");
 script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;

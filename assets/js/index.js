@@ -1,5 +1,5 @@
 // variable to hold API key value
-let key = config.MY_KEY;
+let key = MY_KEY;
 
 // Create script tag & link google api url with config key
 let script = document.createElement("script");
