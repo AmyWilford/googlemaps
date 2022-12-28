@@ -28,11 +28,11 @@ a:hover{
 img {
     width: 14rem;
 }
-/* .table {
-    word-break: break-all;
-} */
 
-@media only screen and (max-width: 576px) {
+#noReportsWarning {
+    display: none;
+}
+@media only screen and (max-width: 575px) {
     #map {
         height: 300px;
         width: 100%;

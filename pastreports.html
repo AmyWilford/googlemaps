@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- import Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Import JQuery -->
-    <link
-    rel="stylesheet"
-    href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-  />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
 
     <link rel="stylesheet" href="assets/css/styles.css">
     <title>pollution reporter - past reports</title>
     <link rel="icon" type="image/x-icon" href="assets/images/pollution-logo.png">
 
 </head>
+
 <body>
     <div>
         <!-- Jumbotron Header -->
-        <div class="text-center custom-background pb-1 row">
-            <div class="col-sm-8 d-flex justify-content-end">
-                <img src="/assets/images/pollution-logo.png"/>
-
+        <div class="custom-background pb-1">
+            <div class="d-flex justify-content-center">
+                <img src="assets/images/pollution-logo.png" />
             </div>
-            <div class="col-sm-4">
-                <div class="d-flex justify-content-end p-3">
-                    <button id="homeButton" class="btn">⇽ back</button>
-                </div>
+            <div class="d-flex justify-content-end p-3">
+                <button id="homeButton" class="btn btn-sm">⇽ back</button>
             </div>
-            <!-- <h2 class="text-uppercase">Pollution Reporter </h2> -->
         </div>
-
-        <!-- Map -->
-    <div class="text-center m-2">
-        <p>Click on any marker to see the details of your pollution report. Use map controls to zoom in or out to see your full range of past reports </p>
     </div>
-        <div class="d-flex justify-content-center">
-            <div id="map"></div>
-        </div>
-        <div class="container pt-2">
-            <table class="table" id="tableReports">
-                <thead>
-                  <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Pollution Concern</th>
-                    <th scope="col">Location</th>
-                  </tr>
-                </thead>
-                <tbody id="tablebody">
 
-                  </tbody>
-                  </table>
-        </div>
-        
-    
- <!-- Jquery script files -->
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- Map -->
+   
+    <div class="d-flex justify-content-center">
+        <div id="map"></div>
+    </div>
+    <div class="text-center m-2">
+        <p>Click on any marker to see the details of your pollution report. Use map controls to zoom in or out to
+            see your full range of past reports </p>
+            <p id="noReportsWarning"><b>You haven't submitted any pollution reports</b></p>
+    </div>
+    <!-- Table of past reports -->
+    <div class="container pt-2">
+        <table class="table" id="tableReports">
+            <thead>
+                <tr>
+                    <th scope="col" width="20%">Date</th>
+                    <th scope="col" width="40%">Pollution Concern</th>
+                    <th scope="col" width="40%">Location</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+<!-- Generated table data populated from local storate -->
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Jquery script files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/config.js"></script>
     <script type="text/javascript" src="assets/js/pastreports.js"></script>
 </body>
+
 </html>

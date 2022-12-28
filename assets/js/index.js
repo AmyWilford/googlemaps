@@ -7,14 +7,14 @@ script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMa
 
 // Establish global variables
 let map;
-// let markers = [];
 let marker;
 let geocoder;
 let pollutionLat;
 let pollutionLng;
-
 let inputLatField = document.getElementById("lat");
 let inputLngField = document.getElementById("lng");
+let seeReportsButton = document.getElementById("pastReportsButton");
+let coordinates
 
 // DatePicker
 $(function () {
@@ -23,8 +23,6 @@ $(function () {
 
 // Function to initiate map - center point begins
 function initMap() {
-  coordinates = { lat: 43.6532, lng: -79.3832 };
-
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 43.6532, lng: -79.3832 },
     zoom: 12,
@@ -53,16 +51,14 @@ function initMap() {
   marker = new google.maps.Marker({
     map,
   });
+  // Add event listener to map - use geocode to grab location
   map.addListener("click", (e) => {
     geocode({ location: e.latLng });
   });
+  // Add event listener to submit button to change geocode address
   submitButton.addEventListener("click", () =>
     geocode({ address: inputText.value })
   );
-  // clearButton.addEventListener("click", () => {
-  //   clear();
-  // });
-  // clear();
 
   // Event listener to show lat and lng of area on click
   map.addListener("click", (e) => {
@@ -132,20 +128,12 @@ function placeMarker(latLng) {
   }
 }
 
-function openPastReports(){
-  document.location.href ='pastreports.html'
+function openPastReports() {
+  document.location.href = "pastreports.html";
 }
 
-let pastReportsPage = document.getElementById('pastReportsButton')
-pastReportsPage.addEventListener('click', openPastReports)
-
-// function placeMarkerAndPanTo(latLng, map) {
-//  new google.maps.Marker({
-//     position: latLng,
-//     map: map,
-//   });
-//   map.panTo(latLng);
-// }
+// let pastReportsPage = document.getElementById("pastReportsButton");
+seeReportsButton.addEventListener("click", openPastReports);
 
 // Get previous pollution reports from local storage
 let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
@@ -153,6 +141,7 @@ if (!pollutionReports) {
   pollutionReports = [];
   localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
 }
+
 console.log(pollutionReports);
 
 // Function to generate random UUID for each report
@@ -176,12 +165,6 @@ function submitPollutionReport(event) {
   let image = document.getElementById("formFile").value;
   let uuid = create_UUID();
 
-  // If lat and lng inputs are filled in use entered data - otherwise will be set to pinned location
-  // if (inputLat || inputLng) {
-  //   pollutionLat = inputLat;
-  //   pollutionLng = inputLng;
-  // }
-
   // Set report in an object
   let report = {
     inputLat,
@@ -193,7 +176,6 @@ function submitPollutionReport(event) {
     pollutionConcern,
     image,
   };
-  console.log(report);
   pollutionReports.push(report);
   if (report) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
