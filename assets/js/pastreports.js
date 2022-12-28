@@ -17,8 +17,8 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
-      lat: parseInt(pollutionReports[pollutionReports.length - 1].pollutionLat),
-      lng: parseInt(pollutionReports[pollutionReports.length - 1].pollutionLng),
+      lat: parseInt(pollutionReports[0].pollutionLat),
+      lng: parseInt(pollutionReports[0].pollutionLng),
     },
     zoom: 7,
     disableDefaultUI: true,

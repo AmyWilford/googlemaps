@@ -18,7 +18,7 @@ let inputLngField = document.getElementById("lng");
 
 // DatePicker
 $(function () {
-  $("#datepicker").datepicker();
+  $("#datepicker").datepicker({ maxDate: new Date(), autoclose: true });
 });
 
 // Function to initiate map - center point begins
@@ -29,6 +29,8 @@ function initMap() {
     center: { lat: 43.6532, lng: -79.3832 },
     zoom: 7,
     disableDefaultUI: true,
+    zoomControl: true,
+    streetViewControl: true,
   });
   // establish google maps Geocoder
   geocoder = new google.maps.Geocoder();
@@ -45,11 +47,11 @@ function initMap() {
   submitButton.value = "Search";
   submitButton.classList.add("btn", "btn-success", "m-2", "btn-sm");
   // Create geocoder clear button
-  const clearButton = document.createElement("input");
+  // const clearButton = document.createElement("input");
 
-  clearButton.type = "button";
-  clearButton.value = "Clear";
-  clearButton.classList.add("button", "button-secondary");
+  // clearButton.type = "button";
+  // clearButton.value = "Clear";
+  // clearButton.classList.add("button", "button-secondary");
   // response = document.createElement("pre");
   // response.id = "response";
   // response.innerText = "";
@@ -59,7 +61,7 @@ function initMap() {
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
   marker = new google.maps.Marker({
     map,
   });
@@ -69,9 +71,9 @@ function initMap() {
   submitButton.addEventListener("click", () =>
     geocode({ address: inputText.value })
   );
-  clearButton.addEventListener("click", () => {
-    clear();
-  });
+  // clearButton.addEventListener("click", () => {
+  //   clear();
+  // });
   // clear();
 
   // Event listener to show lat and lng of area on click
@@ -115,7 +117,6 @@ function initMap() {
 
 function clear() {
   marker.setMap(null);
-  console.log("working");
 }
 
 // Function to reset map per geolocation search
@@ -129,7 +130,6 @@ function geocode(request) {
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
       marker.setMap(map);
-      console.log(results);
       return results;
     })
     .catch((e) => {
@@ -190,6 +190,7 @@ function submitPollutionReport(event) {
     pollutionLat = inputLat;
     pollutionLng = inputLng;
   }
+
   // Set report in an object
   let report = {
     pollutionLat,
@@ -208,9 +209,9 @@ function submitPollutionReport(event) {
   }
 }
 
-// On submit report button click, run submitPollutionReport function
-let submitReport = document.getElementById("submit-report");
-submitReport.addEventListener("click", submitPollutionReport);
+// On form submit, run submitPollutionReport function
+let reportForm = document.getElementById("report-form");
+reportForm.addEventListener("submit", submitPollutionReport);
 
 window.initMap = initMap;
 document.head.appendChild(script);
