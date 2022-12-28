@@ -15,6 +15,13 @@ let response;
 let pollutionLat;
 let pollutionLng;
 
+// DatePicker
+$( function() {
+  $( "#datepicker" ).datepicker();
+} );
+
+
+
 // Function to initiate map - center point begins
 function initMap() {
   coordinates = { lat: 43.6532, lng: -79.3832 };
