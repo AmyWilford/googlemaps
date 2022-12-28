@@ -10,8 +10,6 @@ let map;
 let markers = [];
 let marker;
 let geocoder;
-let responseDiv;
-let response;
 let pollutionLat;
 let pollutionLng;
 
@@ -28,7 +26,7 @@ function initMap() {
   coordinates = { lat: 43.6532, lng: -79.3832 };
 
   map = new google.maps.Map(document.getElementById("map"), {
-    center: coordinates,
+    center: { lat: 43.6532, lng: -79.3832 },
     zoom: 7,
     disableDefaultUI: true,
   });
@@ -37,7 +35,7 @@ function initMap() {
 
   // Create geocoder search input and set attributes
   const inputText = document.createElement("input");
-  inputText.classList.add("p-2", "m-2")
+  inputText.classList.add("p-2", "m-2");
   inputText.type = "text";
   inputText.placeholder = "Search your location";
 
@@ -47,11 +45,11 @@ function initMap() {
   submitButton.value = "Search";
   submitButton.classList.add("btn", "btn-success", "m-2", "btn-sm");
   // Create geocoder clear button
-  // const clearButton = document.createElement("input");
+  const clearButton = document.createElement("input");
 
-  // clearButton.type = "button";
-  // clearButton.value = "Clear";
-  // clearButton.classList.add("button", "button-secondary");
+  clearButton.type = "button";
+  clearButton.value = "Clear";
+  clearButton.classList.add("button", "button-secondary");
   // response = document.createElement("pre");
   // response.id = "response";
   // response.innerText = "";
@@ -61,7 +59,7 @@ function initMap() {
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
   marker = new google.maps.Marker({
     map,
   });
@@ -71,14 +69,14 @@ function initMap() {
   submitButton.addEventListener("click", () =>
     geocode({ address: inputText.value })
   );
-  // clearButton.addEventListener("click", () => {
-  //   clear();
-  // });
+  clearButton.addEventListener("click", () => {
+    clear();
+  });
   // clear();
 
   // Event listener to show lat and lng of area on click
   map.addListener("click", (e) => {
-    placeMarkerAndPanTo(e.latLng, map);
+    placeMarker(e.latLng, map);
   });
 
   // document
@@ -117,6 +115,7 @@ function initMap() {
 
 function clear() {
   marker.setMap(null);
+  console.log("working");
 }
 
 // Function to reset map per geolocation search
@@ -130,6 +129,7 @@ function geocode(request) {
       map.setCenter(results[0].geometry.location);
       marker.setPosition(results[0].geometry.location);
       marker.setMap(map);
+      console.log(results);
       return results;
     })
     .catch((e) => {
@@ -137,15 +137,24 @@ function geocode(request) {
     });
 }
 // function to place marker and move map
-function placeMarkerAndPanTo(latLng, map) {
-  new google.maps.Marker({
-    position: latLng,
-    map: map,
-  });
-  map.panTo(latLng);
+function placeMarker(latLng) {
+  if (marker) {
+    marker.setPosition(latLng);
+  } else {
+    marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+    });
+  }
 }
 
-// Function to pull information from submit form and submit a pollution report
+// function placeMarkerAndPanTo(latLng, map) {
+//  new google.maps.Marker({
+//     position: latLng,
+//     map: map,
+//   });
+//   map.panTo(latLng);
+// }
 
 // Get previous pollution reports from local storage
 let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
