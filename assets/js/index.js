@@ -16,11 +16,9 @@ let pollutionLat;
 let pollutionLng;
 
 // DatePicker
-$( function() {
-  $( "#datepicker" ).datepicker();
-} );
-
-
+$(function () {
+  $("#datepicker").datepicker();
+});
 
 // Function to initiate map - center point begins
 function initMap() {
@@ -146,6 +144,9 @@ function submitPollutionReport(event) {
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let pollutionConcern = document.getElementById("pollutionConcern").value;
+  let date = document.getElementById("datepicker").value;
+  console.log(date);
+  let image = document.getElementById("formFile").value;
 
   // If lat and lng inputs are filled in use entered data - otherwise will be set to pinned location
   if (inputLat || inputLng) {
@@ -158,7 +159,9 @@ function submitPollutionReport(event) {
     pollutionLng,
     name,
     email,
+    date,
     pollutionConcern,
+    image,
   };
   console.log(report);
 }
