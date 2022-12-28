@@ -37,14 +37,15 @@ function initMap() {
 
   // Create geocoder search input and set attributes
   const inputText = document.createElement("input");
+  inputText.classList.add("p-2", "m-2")
   inputText.type = "text";
   inputText.placeholder = "Search your location";
 
   // Create geocoder search button and set attributes
   const submitButton = document.createElement("input");
   submitButton.type = "button";
-  submitButton.value = "Geocode";
-  submitButton.classList.add("btn", "btn-success");
+  submitButton.value = "Search";
+  submitButton.classList.add("btn", "btn-success", "m-2", "btn-sm");
   // Create geocoder clear button
   // const clearButton = document.createElement("input");
 
