@@ -15,6 +15,9 @@ let response;
 let pollutionLat;
 let pollutionLng;
 
+let inputLatField = document.getElementById("lat");
+let inputLngField = document.getElementById("lng");
+
 // DatePicker
 $(function () {
   $("#datepicker").datepicker();
@@ -102,7 +105,10 @@ function initMap() {
       )
     );
     pollutionLat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
+    inputLatField.value = pollutionLat;
     pollutionLng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
+    inputLngField.value = pollutionLng;
+
     infoWindow.open(map);
   });
 }
