@@ -152,6 +152,7 @@ if (!pollutionReports) {
   pollutionReports = [];
   localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
 }
+console.log(pollutionReports);
 
 // Function to generate random UUID for each report
 function create_UUID() {
@@ -191,11 +192,9 @@ function submitPollutionReport(event) {
     image,
   };
   console.log(report);
-}
-
-function saveReport(report) {
+  pollutionReports.push(report);
   if (report) {
-    localStorage.setItem();
+    localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
 }
 
