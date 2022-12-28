@@ -30,13 +30,6 @@ if (pollutionReports.length < 1) {
 
 const markers = [];
 
-
-// if (pollutionReports.length < 0) {
-//   warning.classList.add("d-block");
-// } else {
-
-// }
-
 // Function to create map - center will load to location of last pollution report.
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
