@@ -61,8 +61,6 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
   // map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
-  // map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
-  // map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
   marker = new google.maps.Marker({
     map,
   });
@@ -81,6 +79,10 @@ function initMap() {
   map.addListener("click", (e) => {
     placeMarkerAndPanTo(e.latLng, map);
   });
+
+  // document
+  // .getElementById("delete-markers")
+  // .addEventListener("click", deleteMarkers);
 
   // Info window will show coordaintes
   let infoWindow = new google.maps.InfoWindow({
@@ -108,10 +110,10 @@ function initMap() {
     inputLatField.value = pollutionLat;
     pollutionLng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
     inputLngField.value = pollutionLng;
-
     infoWindow.open(map);
   });
 }
+
 function clear() {
   marker.setMap(null);
 }
@@ -133,7 +135,7 @@ function geocode(request) {
       alert("Geocode was not successful for the following reason: " + e);
     });
 }
-
+// function to place marker and move map
 function placeMarkerAndPanTo(latLng, map) {
   new google.maps.Marker({
     position: latLng,
@@ -143,6 +145,24 @@ function placeMarkerAndPanTo(latLng, map) {
 }
 
 // Function to pull information from submit form and submit a pollution report
+
+// Get previous pollution reports from local storage
+let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
+if (!pollutionReports) {
+  pollutionReports = [];
+  localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
+}
+
+// Function to generate random UUID for each report
+function create_UUID() {
+  let dt = new Date().getTime();
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    let r = (dt + Math.random() * 16) % 16 | 0;
+    dt = Math.floor(dt / 16);
+    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
 function submitPollutionReport(event) {
   event.preventDefault();
   let inputLat = document.getElementById("lat").value;
@@ -151,8 +171,8 @@ function submitPollutionReport(event) {
   let email = document.getElementById("email").value;
   let pollutionConcern = document.getElementById("pollutionConcern").value;
   let date = document.getElementById("datepicker").value;
-  console.log(date);
   let image = document.getElementById("formFile").value;
+  let uuid = create_UUID();
 
   // If lat and lng inputs are filled in use entered data - otherwise will be set to pinned location
   if (inputLat || inputLng) {
@@ -163,6 +183,7 @@ function submitPollutionReport(event) {
   let report = {
     pollutionLat,
     pollutionLng,
+    id: uuid,
     name,
     email,
     date,
@@ -172,10 +193,15 @@ function submitPollutionReport(event) {
   console.log(report);
 }
 
+function saveReport(report) {
+  if (report) {
+    localStorage.setItem();
+  }
+}
+
 // On submit report button click, run submitPollutionReport function
 let submitReport = document.getElementById("submit-report");
 submitReport.addEventListener("click", submitPollutionReport);
 
 window.initMap = initMap;
-// Add generated script tag to file
 document.head.appendChild(script);
