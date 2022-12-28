@@ -39,45 +39,47 @@
         
         <!-- Pollution Report Form Submission -->
         <div class="d-flex justify-content-center w-100">
-            <form class="m-3" id="report-form" >
-                <small><i>Place a pin on the map to get your lat and lng. If you already know it, type in the input fields below</i></small>
+            <form class="m-3" id="report-form">
+                <div class="text-center">
+                    <small><i>Place a pin on the map to get your lat and lng. If you already know it, type in the input fields below</i></small>
+
+                </div>
                 <div class="form-group row pt-3">
 
-                    <label class="col-sm-4 col-form-label">Location</label>
+                    <label class="col-sm-4 col-form-label"><span class="text-danger">* </span>Pin Location</label>
                         <div class="col">
                             <input type="text" id="lat"class="form-control" placeholder="latitude" required>
                           </div>
                           <div class="col">
                               <input type="text" id="lng" class="form-control" placeholder="longitude" required>
                           </div> 
-                   
                   </div>
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">First & Last Name</label>
+                    <label class="col-sm-4 col-form-label"><span class="text-danger">* </span>First & Last Name:</label>
                     <div class="col-sm-8">
                       <input type="text" id="name" class="form-control" required>
                     </div>
                   </div>
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Email</label>
+                    <label class="col-sm-4 col-form-label"><span class="text-danger">* </span>Email:</label>
                     <div class="col-sm-8">
                       <input type="email" id="email" class="form-control" required>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">Describe Your Pollution Concern</label>
+                    <label class="col-sm-4 col-form-label"><span class="text-danger">* </span>Describe Your Pollution Concern:</label>
                     <div class="col-sm-8">
                       <textarea type="text" id="pollutionConcern" class="form-control" rows="3" required></textarea>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="formFile">Upload Image (optional)</label>
+                    <label class="col-sm-4 col-form-label" for="formFile">Upload Image <span class="font-italic">(optional)</span></label>
                     <div class="col-sm-8">
                         <input class="form-control" type="file" id="formFile">
                     </div>
                   </div>
                   <div class="form-group row"> 
-                    <label class="col-sm-4 col-form-label" for="formFile">Date:</label>
+                    <label class="col-sm-4 col-form-label" for="formFile"><span class="text-danger">* </span>Date:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" id="datepicker" required></p>
                     </div>

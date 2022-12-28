@@ -5,4 +5,11 @@
     height: 300px;
     width: 80%;
 }
+a {
+    color: green;
+}
 
+a:hover{
+    color: white ;
+    text-decoration: none
+}

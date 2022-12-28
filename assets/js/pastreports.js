@@ -20,8 +20,10 @@ function initMap() {
       lat: parseInt(pollutionReports[0].pollutionLat),
       lng: parseInt(pollutionReports[0].pollutionLng),
     },
-    zoom: 7,
+    zoom: 10,
     disableDefaultUI: true,
+    zoomControl: true,
+    streetViewControl: true,
   });
 
   pollutionReports.forEach((e) => {
