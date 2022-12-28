@@ -174,29 +174,33 @@ function create_UUID() {
   });
 }
 
+
+
 function submitPollutionReport(event) {
   event.preventDefault();
-  let inputLat = document.getElementById("lat").value;
-  let inputLng = document.getElementById("lng").value;
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let pollutionConcern = document.getElementById("pollutionConcern").value;
-  let date = document.getElementById("datepicker").value;
-  let image = document.getElementById("formFile").value;
-  let uuid = create_UUID();
+
+let inputLat =inputLatField.value
+let inputLng = inputLngField.value
+let userName = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let pollutionConcern = document.getElementById("pollutionConcern").value;
+let date = document.getElementById("datepicker").value;
+let image = document.getElementById("formFile").value;
+let uuid = create_UUID();
+
 
   // If lat and lng inputs are filled in use entered data - otherwise will be set to pinned location
-  if (inputLat || inputLng) {
-    pollutionLat = inputLat;
-    pollutionLng = inputLng;
-  }
+  // if (inputLat || inputLng) {
+  //   pollutionLat = inputLat;
+  //   pollutionLng = inputLng;
+  // }
 
   // Set report in an object
   let report = {
-    pollutionLat,
-    pollutionLng,
+    inputLat,
+    inputLng,
     id: uuid,
-    name,
+    userName,
     email,
     date,
     pollutionConcern,
@@ -208,6 +212,7 @@ function submitPollutionReport(event) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
 }
+
 
 // On form submit, run submitPollutionReport function
 let reportForm = document.getElementById("report-form");

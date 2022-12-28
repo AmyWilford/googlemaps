@@ -17,27 +17,26 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: {
-      lat: parseInt(pollutionReports[0].pollutionLat),
-      lng: parseInt(pollutionReports[0].pollutionLng),
+      lat: parseInt(pollutionReports[0].inputLat),
+      lng: parseInt(pollutionReports[0].inputLng),
     },
-    zoom: 10,
+    zoom: 5,
     disableDefaultUI: true,
     zoomControl: true,
     streetViewControl: true,
   });
 
   pollutionReports.forEach((e) => {
+    console.log('working')
     const marker = new google.maps.Marker({
       position: {
-        lat: parseInt(e.pollutionLat) * 1,
-        lng: parseInt(e.pollutionLng) * 1,
+        lat: parseInt(e.inputLat),
+        lng: parseInt(e.inputLng),
       },
       map: map,
-      // icon: './assets/images/campsite.png',
-      //   content: e.pollutionConcern
     });
     const infowindow = new google.maps.InfoWindow({
-      content: `<div>${e.pollutionConcern}<div><div>${e.pollutionLat} & ${e.pollutionLng}</div>`,
+      content: `<div class="mb-1"><b>Your Pollution Concern:</b></div><div class="font-italic">${e.pollutionConcern}</div><div class="mt-2">Latitude: ${e.inputLat}</div><div> Longitude: ${e.inputLng}</div>`,
     });
     infowindow.close();
 
