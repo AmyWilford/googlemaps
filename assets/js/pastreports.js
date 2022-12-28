@@ -56,6 +56,19 @@ function initMap() {
         map,
       });
     });
+
+    let table = document.getElementById("tableReports");
+    let newTableRow = document.createElement("tr");
+    newTableRow.setAttribute("scope", "row");
+    let tdDate = document.createElement("td");
+    let tdLocation = document.createElement("td");
+    let tdConcern = document.createElement("td");
+
+    tdDate.innerHTML = el.date;
+    tdLocation.innerHTML = `${lat} & ${lng}`;
+    tdConcern.innerHTML = el.pollutionConcern;
+    table.append(newTableRow);
+    newTableRow.append(tdDate, tdLocation, tdConcern);
   });
 }
 
