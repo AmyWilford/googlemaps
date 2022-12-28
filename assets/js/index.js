@@ -1,5 +1,5 @@
 // variable to hold API key value
-let key = MY_KEY;
+let key = config.MY_KEY;
 
 // Create script tag & link google api url with config key
 let script = document.createElement("script");
@@ -68,7 +68,7 @@ function initMap() {
   // Info window will show coordaintes
   let infoWindow = new google.maps.InfoWindow({
     content: "Zoom in to pin the pollution location",
-    position: coordinates,
+    position: { lat: 43.6532, lng: -79.3832 },
   });
 
   infoWindow.open(map);
