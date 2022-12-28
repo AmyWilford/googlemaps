@@ -68,7 +68,7 @@ function initMap() {
     tdLocation.innerHTML = `${lat} & ${lng}`;
     tdConcern.innerHTML = el.pollutionConcern;
     table.append(newTableRow);
-    newTableRow.append(tdDate, tdLocation, tdConcern);
+    newTableRow.append(tdDate, tdConcern, tdLocation);
   });
 }
 
