@@ -7,7 +7,7 @@ script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMa
 
 // Establish global variables
 let map;
-let markers = [];
+// let markers = [];
 let marker;
 let geocoder;
 let pollutionLat;
@@ -27,7 +27,7 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 43.6532, lng: -79.3832 },
-    zoom: 10,
+    zoom: 12,
     disableDefaultUI: true,
     zoomControl: true,
     streetViewControl: true,
@@ -68,7 +68,6 @@ function initMap() {
   map.addListener("click", (e) => {
     placeMarker(e.latLng, map);
   });
-
 
   // Info window will show coordaintes
   let infoWindow = new google.maps.InfoWindow({
@@ -159,19 +158,16 @@ function create_UUID() {
   });
 }
 
-
-
 function submitPollutionReport(event) {
   event.preventDefault();
-let inputLat =inputLatField.value
-let inputLng = inputLngField.value
-let userName = document.getElementById("name").value;
-let email = document.getElementById("email").value;
-let pollutionConcern = document.getElementById("pollutionConcern").value;
-let date = document.getElementById("datepicker").value;
-let image = document.getElementById("formFile").value;
-let uuid = create_UUID();
-
+  let inputLat = inputLatField.value;
+  let inputLng = inputLngField.value;
+  let userName = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let pollutionConcern = document.getElementById("pollutionConcern").value;
+  let date = document.getElementById("datepicker").value;
+  let image = document.getElementById("formFile").value;
+  let uuid = create_UUID();
 
   // If lat and lng inputs are filled in use entered data - otherwise will be set to pinned location
   // if (inputLat || inputLng) {
@@ -195,9 +191,12 @@ let uuid = create_UUID();
   if (report) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
-  inputLat = '';
+  reset();
 }
 
+function reset() {
+  document.getElementById("report-form").reset();
+}
 
 // On form submit, run submitPollutionReport function
 let reportForm = document.getElementById("report-form");
