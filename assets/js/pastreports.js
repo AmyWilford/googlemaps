@@ -72,5 +72,12 @@ function initMap() {
   });
 }
 
+function goHome(){
+    document.location.href ='index.html'
+  }
+  
+  let homeButton = document.getElementById('homeButton')
+  homeButton.addEventListener('click', goHome)
+
 window.initMap = initMap;
 document.head.appendChild(script);

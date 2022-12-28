@@ -132,6 +132,13 @@ function placeMarker(latLng) {
   }
 }
 
+function openPastReports(){
+  document.location.href ='pastreports.html'
+}
+
+let pastReportsPage = document.getElementById('pastReportsButton')
+pastReportsPage.addEventListener('click', openPastReports)
+
 // function placeMarkerAndPanTo(latLng, map) {
 //  new google.maps.Marker({
 //     position: latLng,
