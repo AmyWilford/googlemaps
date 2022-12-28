@@ -46,18 +46,6 @@ function initMap() {
   submitButton.type = "button";
   submitButton.value = "Search";
   submitButton.classList.add("btn", "btn-success", "m-2", "btn-sm");
-  // Create geocoder clear button
-  // const clearButton = document.createElement("input");
-
-  // clearButton.type = "button";
-  // clearButton.value = "Clear";
-  // clearButton.classList.add("button", "button-secondary");
-  // response = document.createElement("pre");
-  // response.id = "response";
-  // response.innerText = "";
-  // responseDiv = document.createElement("div");
-  // responseDiv.id = "response-container";
-  // responseDiv.appendChild(response);
 
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
@@ -81,9 +69,6 @@ function initMap() {
     placeMarker(e.latLng, map);
   });
 
-  // document
-  // .getElementById("delete-markers")
-  // .addEventListener("click", deleteMarkers);
 
   // Info window will show coordaintes
   let infoWindow = new google.maps.InfoWindow({
@@ -178,7 +163,6 @@ function create_UUID() {
 
 function submitPollutionReport(event) {
   event.preventDefault();
-
 let inputLat =inputLatField.value
 let inputLng = inputLngField.value
 let userName = document.getElementById("name").value;
@@ -211,6 +195,7 @@ let uuid = create_UUID();
   if (report) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
+  inputLat = '';
 }
 
 

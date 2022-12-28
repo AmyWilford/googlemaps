@@ -26,17 +26,21 @@ function initMap() {
     streetViewControl: true,
   });
 
-  pollutionReports.forEach((e) => {
+  pollutionReports.forEach((el) => {
     console.log('working')
+    let lat = el.inputLat*1
+    let lng = el.inputLng*1;
     const marker = new google.maps.Marker({
       position: {
-        lat: parseInt(e.inputLat),
-        lng: parseInt(e.inputLng),
+        lat: lat,
+        lng: lng,
       },
       map: map,
     });
+    console.log(lat),
+    console.log(lng)
     const infowindow = new google.maps.InfoWindow({
-      content: `<div class="mb-1"><b>Your Pollution Concern:</b></div><div class="font-italic">${e.pollutionConcern}</div><div class="mt-2">Latitude: ${e.inputLat}</div><div> Longitude: ${e.inputLng}</div>`,
+      content: `<div class="mb-1"><b>Your Pollution Concern:</b></div><div class="font-italic">${el.pollutionConcern}</div><div class="mt-2">Latitude: ${lat}</div><div> Longitude: ${lng}</div>`,
     });
     infowindow.close();
 
