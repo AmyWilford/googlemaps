@@ -34,9 +34,13 @@ img {
     width: 14rem;
 }
 
+#thankYouMessage{
+    display:none;
+}
 #noReportsWarning {
     display: none;
 }
+
 /* Small screen styles - adjust for responsiveness */
 @media only screen and (max-width: 575px) {
     #map {

@@ -14,12 +14,19 @@ let pollutionLng;
 let inputLatField = document.getElementById("lat");
 let inputLngField = document.getElementById("lng");
 let seeReportsButton = document.getElementById("pastReportsButton");
+let thankYouMessage = document.getElementById("thankYouMessage");
 let coordinates;
 
 // JQuery Date Picker
 $(function () {
   $("#datepicker").datepicker({ maxDate: new Date(), autoclose: true });
 });
+// Function to reload page
+function reload() {
+  document.location.href = "index.html";
+  thankYouMessage.classList.add('d-none')
+}
+document.getElementById("confirmationRelaod").addEventListener("click", reload);
 
 // Function to open past reports page
 function openPastReports() {
@@ -27,6 +34,9 @@ function openPastReports() {
 }
 // Add event listener to button to change page
 seeReportsButton.addEventListener("click", openPastReports);
+document
+  .getElementById("confirmationSeeReports")
+  .addEventListener("click", openPastReports);
 
 // Function to initiate map - center point begins at Toronto
 function initMap() {
@@ -138,7 +148,7 @@ function placeMarker(latLng) {
   }
 }
 
-// Get previous pollution reports from local storage. 
+// Get previous pollution reports from local storage.
 let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
 if (!pollutionReports) {
   pollutionReports = [];
@@ -171,8 +181,9 @@ function submitPollutionReport(event) {
   let date = document.getElementById("datepicker").value;
   let image = document.getElementById("formFile").value;
   let uuid = create_UUID();
-
-  // Set form values as Object called report 
+  thankYouMessage.classList.add("d-block");
+  document.getElementById("report-form").classList.add("d-none");
+  // Set form values as Object called report
   let report = {
     inputLat,
     inputLng,
@@ -188,11 +199,9 @@ function submitPollutionReport(event) {
   if (report) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
-  // Reset form 
+  // Reset form
   reset();
 }
-
-
 
 // On form submit, run submitPollutionReport function
 let reportForm = document.getElementById("report-form");
