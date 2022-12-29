@@ -14,14 +14,21 @@ let pollutionLng;
 let inputLatField = document.getElementById("lat");
 let inputLngField = document.getElementById("lng");
 let seeReportsButton = document.getElementById("pastReportsButton");
-let coordinates
+let coordinates;
 
-// DatePicker
+// JQuery Date Picker
 $(function () {
   $("#datepicker").datepicker({ maxDate: new Date(), autoclose: true });
 });
 
-// Function to initiate map - center point begins
+// Function to open past reports page
+function openPastReports() {
+  document.location.href = "pastreports.html";
+}
+// Add event listener to button to change page
+seeReportsButton.addEventListener("click", openPastReports);
+
+// Function to initiate map - center point begins at Toronto
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 43.6532, lng: -79.3832 },
@@ -45,17 +52,18 @@ function initMap() {
   submitButton.value = "search";
   submitButton.classList.add("btn", "search-button", "m-2", "btn-sm");
 
+  // Place input and search button on the  map
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+  // Set a marker on the center point of map
   marker = new google.maps.Marker({
     map,
   });
-  // Add event listener to map - use geocode to grab location
+  // Add click event listener to map - use geocode to grab location
   map.addListener("click", (e) => {
     geocode({ location: e.latLng });
   });
-  // Add event listener to submit button to change geocode address
+  // Add click event listener to submit button to change geocode address
   submitButton.addEventListener("click", () =>
     geocode({ address: inputText.value })
   );
@@ -87,6 +95,7 @@ function initMap() {
           mapsMouseEvent.latLng.toJSON().lng
       )
     );
+    // Get latitude and logitude of geocoded area - use JSON.stringify to access object data - set values to auto fill the Lat and Lng form fields
     pollutionLat = JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
     inputLatField.value = pollutionLat;
     pollutionLng = JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
@@ -95,6 +104,7 @@ function initMap() {
   });
 }
 
+// Function clear previous markers
 function clear() {
   marker.setMap(null);
 }
@@ -128,21 +138,12 @@ function placeMarker(latLng) {
   }
 }
 
-function openPastReports() {
-  document.location.href = "pastreports.html";
-}
-
-// let pastReportsPage = document.getElementById("pastReportsButton");
-seeReportsButton.addEventListener("click", openPastReports);
-
-// Get previous pollution reports from local storage
+// Get previous pollution reports from local storage. 
 let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
 if (!pollutionReports) {
   pollutionReports = [];
   localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
 }
-
-console.log(pollutionReports);
 
 // Function to generate random UUID for each report
 function create_UUID() {
@@ -153,9 +154,15 @@ function create_UUID() {
     return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
   });
 }
+// Function to reset form
+function reset() {
+  document.getElementById("report-form").reset();
+}
 
+// Function to submit pollition report
 function submitPollutionReport(event) {
   event.preventDefault();
+  // Access all form input values
   let inputLat = inputLatField.value;
   let inputLng = inputLngField.value;
   let userName = document.getElementById("name").value;
@@ -165,7 +172,7 @@ function submitPollutionReport(event) {
   let image = document.getElementById("formFile").value;
   let uuid = create_UUID();
 
-  // Set report in an object
+  // Set form values as Object called report 
   let report = {
     inputLat,
     inputLng,
@@ -176,20 +183,21 @@ function submitPollutionReport(event) {
     pollutionConcern,
     image,
   };
+  // Push new report to pollutionReports array and set into local storage
   pollutionReports.push(report);
   if (report) {
     localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
   }
+  // Reset form 
   reset();
 }
 
-function reset() {
-  document.getElementById("report-form").reset();
-}
+
 
 // On form submit, run submitPollutionReport function
 let reportForm = document.getElementById("report-form");
 reportForm.addEventListener("submit", submitPollutionReport);
 
+// Init map and append script file with google maps api url
 window.initMap = initMap;
 document.head.appendChild(script);

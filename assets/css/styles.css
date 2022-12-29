@@ -1,21 +1,8 @@
+/* Set general styles */
 body {
     color: #032E66;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
-}
-.custom-background{
-    background-color: #A5D1C0;
-    font-family: 'Raleway', sans-serif;
-}
-.search-button {
-    background-color: #032E66;
-    color:white;
-
-}
-
-#map {
-    height: 300px;
-    width: 80%;
 }
 a {
     color: #032E66;
@@ -25,6 +12,24 @@ a:hover{
     color: white ;
     text-decoration: none
 }
+/* Custom button styles */
+.custom-background{
+    background-color: #A5D1C0;
+    font-family: 'Raleway', sans-serif;
+}
+/* Custom Search Button Styles */
+.search-button {
+    background-color: #032E66;
+    color:white;
+
+}
+
+/* Map sizing */
+#map {
+    height: 300px;
+    width: 80%;
+}
+/* Header image size */
 img {
     width: 14rem;
 }
@@ -32,6 +37,7 @@ img {
 #noReportsWarning {
     display: none;
 }
+/* Small screen styles - adjust for responsiveness */
 @media only screen and (max-width: 575px) {
     #map {
         height: 300px;

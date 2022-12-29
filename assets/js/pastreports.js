@@ -1,33 +1,36 @@
+// variable to hold API key value
 let key = config.MY_KEY;
 
+// Create script tag & link google api url with config key
 let script = document.createElement("script");
 script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
 
+// Establish global variables
 let lat;
 let lng;
 let warning = document.getElementById("noReportsWarning");
+let table = document.getElementById('tableReports')
 
 // Pull pollution reports from local storage
 let pollutionReports = JSON.parse(localStorage.getItem("pollutionReports"));
 if (!pollutionReports) {
   pollutionReports = [];
   localStorage.setItem("pollutionReports", JSON.stringify(pollutionReports));
-  lat = 0;
-  lng = 0;
 }
-
+// If there are no pollution reports in local storage - set lat/lng to Toronto. 
+// Hide previous reports table and show no reports warning - Else, set to location of last submitted report
 if (pollutionReports.length < 1) {
      warning.classList.add("d-block");
-  lat = 23;
-  lng = 23;
+     table.classList.add('d-none')
+  lat = 43.6532;
+  lng = -79.3832;
 } else {
-    warning.classList.add("d-none");
-
+  warning.classList.add("d-none");
+  table.classList.add('d-block')
   lat = pollutionReports[pollutionReports.length - 1].inputLat * 1;
   lng = pollutionReports[pollutionReports.length - 1].inputLng * 1;
 }
-// Create empty array to hold pollution report markers
-
+// Create empty array to hold pollution local storage report markers
 const markers = [];
 
 // Function to create map - center will load to location of last pollution report.
@@ -72,7 +75,7 @@ function initMap() {
       });
     });
 
-    let table = document.getElementById("tableReports");
+    // Create table row and td elements to hold previous report data - set inner HTML
     let newTableRow = document.createElement("tr");
     newTableRow.setAttribute("scope", "row");
     let tdDate = document.createElement("td");
@@ -82,17 +85,20 @@ function initMap() {
     tdDate.innerHTML = el.date;
     tdLocation.innerHTML = `${lat} & ${lng}`;
     tdConcern.innerHTML = el.pollutionConcern;
+    // Append new table row to table
     table.append(newTableRow);
+    // Append td to table row
     newTableRow.append(tdDate, tdConcern, tdLocation);
   });
 }
 
+// Function to redirect to home page on click
 function goHome() {
   document.location.href = "index.html";
 }
-
 let homeButton = document.getElementById("homeButton");
 homeButton.addEventListener("click", goHome);
 
+// Init map and append script file with google maps api url
 window.initMap = initMap;
 document.head.appendChild(script);
